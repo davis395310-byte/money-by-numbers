@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <rect x="36" y="36" width="952" height="952" rx="200" fill="#08080E" stroke="#8B5CF6" stroke-width="10"/>
+  <text x="512" y="560" text-anchor="middle" dominant-baseline="middle"
+        font-family="DejaVu Sans, Arial, sans-serif" font-weight="bold">
+    <tspan fill="#8B5CF6" font-size="330">$</tspan><tspan fill="#2DD4BF" font-size="190">x</tspan><tspan fill="#8B5CF6" font-size="330">#</tspan>
+  </text>
+</svg>

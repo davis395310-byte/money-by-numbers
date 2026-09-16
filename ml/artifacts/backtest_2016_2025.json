@@ -1,0 +1,694 @@
+{
+  "learners": [
+    "lightgbm",
+    "hgb"
+  ],
+  "feature_names": [
+    "elo_diff",
+    "off_form_diff",
+    "def_form_diff",
+    "net_form_diff",
+    "streak_diff",
+    "rest_diff",
+    "div_game",
+    "dome",
+    "neutral",
+    "h2h_margin_avg",
+    "week"
+  ],
+  "aggregate": {
+    "seasons": [
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025
+    ],
+    "n_games": 2639,
+    "accuracy": 0.5947132081614934,
+    "brier": 0.2370863760075043,
+    "logloss": 0.7062236540238869,
+    "margin_mae": 10.570227588295799,
+    "total_mae": 11.394234462032175,
+    "ats_accuracy": 0.5066045066045066,
+    "ats_n": 2574,
+    "ou_accuracy": 0.49388846447669976,
+    "ou_n": 2618,
+    "elo_accuracy": 0.6216325021706101,
+    "elo_brier": 0.23443151688295433,
+    "accuracy_vs_elo_baseline": -0.026919294009116634
+  },
+  "folds": [
+    {
+      "season": 2016,
+      "n_games": 256,
+      "accuracy": 0.60546875,
+      "brier": 0.2332026775626727,
+      "logloss": 0.6583685196636033,
+      "margin_mae": 9.772200071308458,
+      "total_mae": 11.828232810812278,
+      "ats_accuracy": 0.5099601593625498,
+      "ats_n": 251,
+      "ou_accuracy": 0.42745098039215684,
+      "ou_n": 255,
+      "calibration": [
+        {
+          "bin_center": 0.25,
+          "predicted": 0.25705645161290325,
+          "observed": 0.25,
+          "count": 8
+        },
+        {
+          "bin_center": 0.35000000000000003,
+          "predicted": 0.35873015873015873,
+          "observed": 0.3333333333333333,
+          "count": 9
+        },
+        {
+          "bin_center": 0.45,
+          "predicted": 0.460886139961878,
+          "observed": 0.4878048780487805,
+          "count": 41
+        },
+        {
+          "bin_center": 0.55,
+          "predicted": 0.5748547552646485,
+          "observed": 0.5743243243243243,
+          "count": 148
+        },
+        {
+          "bin_center": 0.6500000000000001,
+          "predicted": 0.6324786324786325,
+          "observed": 0.3333333333333333,
+          "count": 3
+        },
+        {
+          "bin_center": 0.75,
+          "predicted": 0.7023809523809522,
+          "observed": 0.7659574468085106,
+          "count": 47
+        }
+      ],
+      "elo_accuracy": 0.6015625,
+      "elo_brier": 0.2359637219722041,
+      "elo_ats_accuracy": 0.5099601593625498,
+      "meta_weights": {
+        "lightgbm": 0.9400718943456985,
+        "hgb": -0.18396506212573135
+      }
+    },
+    {
+      "season": 2017,
+      "n_games": 256,
+      "accuracy": 0.5703125,
+      "brier": 0.24439530665092712,
+      "logloss": 0.9785994227599782,
+      "margin_mae": 11.25297520586574,
+      "total_mae": 11.564250504233346,
+      "ats_accuracy": 0.4879032258064516,
+      "ats_n": 248,
+      "ou_accuracy": 0.51171875,
+      "ou_n": 256,
+      "calibration": [
+        {
+          "bin_center": 0.05,
+          "predicted": 0.0,
+          "observed": 0.5,
+          "count": 4
+        },
+        {
+          "bin_center": 0.15000000000000002,
+          "predicted": 0.1369096762172927,
+          "observed": 0.5,
+          "count": 2
+        },
+        {
+          "bin_center": 0.25,
+          "predicted": 0.27123424957280684,
+          "observed": 0.21052631578947367,
+          "count": 19
+        },
+        {
+          "bin_center": 0.45,
+          "predicted": 0.48701491744970005,
+          "observed": 0.5595238095238095,
+          "count": 84
+        },
+        {
+          "bin_center": 0.6500000000000001,
+          "predicted": 0.6084881880146751,
+          "observed": 0.6190476190476191,
+          "count": 105
+        },
+        {
+          "bin_center": 0.75,
+          "predicted": 0.7559055118110234,
+          "observed": 0.6052631578947368,
+          "count": 38
+        },
+        {
+          "bin_center": 0.8500000000000001,
+          "predicted": 0.84,
+          "observed": 1.0,
+          "count": 3
+        },
+        {
+          "bin_center": 0.95,
+          "predicted": 1.0,
+          "observed": 0.0,
+          "count": 1
+        }
+      ],
+      "elo_accuracy": 0.65234375,
+      "elo_brier": 0.22730452313467356,
+      "elo_ats_accuracy": 0.5282258064516129,
+      "meta_weights": {
+        "lightgbm": 0.3607222496947944,
+        "hgb": 0.38344322948512843
+      }
+    },
+    {
+      "season": 2018,
+      "n_games": 256,
+      "accuracy": 0.61328125,
+      "brier": 0.23264479991978726,
+      "logloss": 0.6613064071875656,
+      "margin_mae": 10.374780401504534,
+      "total_mae": 11.603386913830771,
+      "ats_accuracy": 0.5384615384615384,
+      "ats_n": 247,
+      "ou_accuracy": 0.5177865612648221,
+      "ou_n": 253,
+      "calibration": [
+        {
+          "bin_center": 0.05,
+          "predicted": 0.0,
+          "observed": 0.0,
+          "count": 1
+        },
+        {
+          "bin_center": 0.15000000000000002,
+          "predicted": 0.17857142857142858,
+          "observed": 0.45454545454545453,
+          "count": 11
+        },
+        {
+          "bin_center": 0.35000000000000003,
+          "predicted": 0.3686103099710243,
+          "observed": 0.45454545454545453,
+          "count": 11
+        },
+        {
+          "bin_center": 0.45,
+          "predicted": 0.4326923076923076,
+          "observed": 0.4897959183673469,
+          "count": 49
+        },
+        {
+          "bin_center": 0.55,
+          "predicted": 0.5123966942148759,
+          "observed": 0.4473684210526316,
+          "count": 38
+        },
+        {
+          "bin_center": 0.6500000000000001,
+          "predicted": 0.6104790339031394,
+          "observed": 0.6697247706422018,
+          "count": 109
+        },
+        {
+          "bin_center": 0.75,
+          "predicted": 0.711864406779661,
+          "observed": 0.8,
+          "count": 35
+        },
+        {
+          "bin_center": 0.95,
+          "predicted": 0.9411764705882353,
+          "observed": 0.5,
+          "count": 2
+        }
+      ],
+      "elo_accuracy": 0.6328125,
+      "elo_brier": 0.2331392964867816,
+      "elo_ats_accuracy": 0.5020242914979757,
+      "meta_weights": {
+        "lightgbm": 0.37412582255013693,
+        "hgb": 0.3843868241498672
+      }
+    },
+    {
+      "season": 2019,
+      "n_games": 256,
+      "accuracy": 0.578125,
+      "brier": 0.24506722805286824,
+      "logloss": 0.6824345502519797,
+      "margin_mae": 11.631726977391594,
+      "total_mae": 11.436597743639336,
+      "ats_accuracy": 0.45528455284552843,
+      "ats_n": 246,
+      "ou_accuracy": 0.49411764705882355,
+      "ou_n": 255,
+      "calibration": [
+        {
+          "bin_center": 0.15000000000000002,
+          "predicted": 0.14285714285714285,
+          "observed": 0.3,
+          "count": 10
+        },
+        {
+          "bin_center": 0.25,
+          "predicted": 0.27272727272727265,
+          "observed": 0.38095238095238093,
+          "count": 21
+        },
+        {
+          "bin_center": 0.35000000000000003,
+          "predicted": 0.34366264719198547,
+          "observed": 0.3333333333333333,
+          "count": 15
+        },
+        {
+          "bin_center": 0.45,
+          "predicted": 0.41025641025641024,
+          "observed": 0.4,
+          "count": 10
+        },
+        {
+          "bin_center": 0.55,
+          "predicted": 0.5428886024277583,
+          "observed": 0.5072463768115942,
+          "count": 69
+        },
+        {
+          "bin_center": 0.6500000000000001,
+          "predicted": 0.6664084149268996,
+          "observed": 0.5384615384615384,
+          "count": 91
+        },
+        {
+          "bin_center": 0.75,
+          "predicted": 0.7125,
+          "observed": 0.6,
+          "count": 25
+        },
+        {
+          "bin_center": 0.8500000000000001,
+          "predicted": 0.84375,
+          "observed": 0.8181818181818182,
+          "count": 11
+        },
+        {
+          "bin_center": 0.95,
+          "predicted": 1.0,
+          "observed": 1.0,
+          "count": 4
+        }
+      ],
+      "elo_accuracy": 0.62890625,
+      "elo_brier": 0.22876212243358013,
+      "elo_ats_accuracy": 0.5365853658536586,
+      "meta_weights": {
+        "lightgbm": 0.3802396479199285,
+        "hgb": 0.405075889173813
+      }
+    },
+    {
+      "season": 2020,
+      "n_games": 256,
+      "accuracy": 0.5703125,
+      "brier": 0.23910740481344903,
+      "logloss": 0.6740533353861914,
+      "margin_mae": 10.599171438626264,
+      "total_mae": 11.682944614899984,
+      "ats_accuracy": 0.4921875,
+      "ats_n": 256,
+      "ou_accuracy": 0.450199203187251,
+      "ou_n": 251,
+      "calibration": [
+        {
+          "bin_center": 0.05,
+          "predicted": 0.011257143906996097,
+          "observed": 0.25,
+          "count": 4
+        },
+        {
+          "bin_center": 0.15000000000000002,
+          "predicted": 0.15789473684210525,
+          "observed": 0.4,
+          "count": 5
+        },
+        {
+          "bin_center": 0.25,
+          "predicted": 0.2857142857142857,
+          "observed": 0.375,
+          "count": 8
+        },
+        {
+          "bin_center": 0.35000000000000003,
+          "predicted": 0.36217767057821165,
+          "observed": 0.35,
+          "count": 20
+        },
+        {
+          "bin_center": 0.45,
+          "predicted": 0.4571534501876198,
+          "observed": 0.25,
+          "count": 16
+        },
+        {
+          "bin_center": 0.55,
+          "predicted": 0.5435397104294275,
+          "observed": 0.46825396825396826,
+          "count": 126
+        },
+        {
+          "bin_center": 0.6500000000000001,
+          "predicted": 0.6453647416413374,
+          "observed": 0.55,
+          "count": 40
+        },
+        {
+          "bin_center": 0.75,
+          "predicted": 0.7807664291949177,
+          "observed": 0.7878787878787878,
+          "count": 33
+        },
+        {
+          "bin_center": 0.95,
+          "predicted": 0.9166666666666666,
+          "observed": 0.75,
+          "count": 4
+        }
+      ],
+      "elo_accuracy": 0.625,
+      "elo_brier": 0.23552294961203585,
+      "elo_ats_accuracy": 0.5078125,
+      "meta_weights": {
+        "lightgbm": 0.3846483359651892,
+        "hgb": 0.4036711157675478
+      }
+    },
+    {
+      "season": 2021,
+      "n_games": 272,
+      "accuracy": 0.5772058823529411,
+      "brier": 0.2374276020462253,
+      "logloss": 0.668733316578525,
+      "margin_mae": 11.45527397808208,
+      "total_mae": 11.356393727936139,
+      "ats_accuracy": 0.47761194029850745,
+      "ats_n": 268,
+      "ou_accuracy": 0.5427509293680297,
+      "ou_n": 269,
+      "calibration": [
+        {
+          "bin_center": 0.05,
+          "predicted": 0.045309336504646386,
+          "observed": 0.0,
+          "count": 1
+        },
+        {
+          "bin_center": 0.15000000000000002,
+          "predicted": 0.16666666666666666,
+          "observed": 0.625,
+          "count": 8
+        },
+        {
+          "bin_center": 0.35000000000000003,
+          "predicted": 0.3444623395273055,
+          "observed": 0.3404255319148936,
+          "count": 47
+        },
+        {
+          "bin_center": 0.45,
+          "predicted": 0.47651338015127315,
+          "observed": 0.46938775510204084,
+          "count": 49
+        },
+        {
+          "bin_center": 0.55,
+          "predicted": 0.5533150573662301,
+          "observed": 0.45054945054945056,
+          "count": 91
+        },
+        {
+          "bin_center": 0.6500000000000001,
+          "predicted": 0.6256212217531757,
+          "observed": 0.6666666666666666,
+          "count": 36
+        },
+        {
+          "bin_center": 0.75,
+          "predicted": 0.7375409458078991,
+          "observed": 0.7575757575757576,
+          "count": 33
+        },
+        {
+          "bin_center": 0.8500000000000001,
+          "predicted": 0.8636363636363635,
+          "observed": 0.8571428571428571,
+          "count": 7
+        }
+      ],
+      "elo_accuracy": 0.6323529411764706,
+      "elo_brier": 0.2374344369189501,
+      "elo_ats_accuracy": 0.5447761194029851,
+      "meta_weights": {
+        "lightgbm": 0.6513333719522297,
+        "hgb": 0.1205071969096284
+      }
+    },
+    {
+      "season": 2022,
+      "n_games": 271,
+      "accuracy": 0.6199261992619927,
+      "brier": 0.23134094008657655,
+      "logloss": 0.7473722051741455,
+      "margin_mae": 9.430961591908456,
+      "total_mae": 11.423651111587496,
+      "ats_accuracy": 0.5095785440613027,
+      "ats_n": 261,
+      "ou_accuracy": 0.4626865671641791,
+      "ou_n": 268,
+      "calibration": [
+        {
+          "bin_center": 0.05,
+          "predicted": 0.0,
+          "observed": 0.5,
+          "count": 2
+        },
+        {
+          "bin_center": 0.35000000000000003,
+          "predicted": 0.3295454545454547,
+          "observed": 0.3333333333333333,
+          "count": 45
+        },
+        {
+          "bin_center": 0.45,
+          "predicted": 0.46201865915343615,
+          "observed": 0.48863636363636365,
+          "count": 88
+        },
+        {
+          "bin_center": 0.55,
+          "predicted": 0.5758720484472689,
+          "observed": 0.6442307692307693,
+          "count": 104
+        },
+        {
+          "bin_center": 0.6500000000000001,
+          "predicted": 0.6218736287845547,
+          "observed": 0.75,
+          "count": 8
+        },
+        {
+          "bin_center": 0.75,
+          "predicted": 0.767718402278304,
+          "observed": 0.782608695652174,
+          "count": 23
+        },
+        {
+          "bin_center": 0.8500000000000001,
+          "predicted": 0.8666666666666667,
+          "observed": 1.0,
+          "count": 1
+        }
+      ],
+      "elo_accuracy": 0.5904059040590406,
+      "elo_brier": 0.24398219694825807,
+      "elo_ats_accuracy": 0.4789272030651341,
+      "meta_weights": {
+        "lightgbm": 0.982526568916906,
+        "hgb": -0.22713991394337402
+      }
+    },
+    {
+      "season": 2023,
+      "n_games": 272,
+      "accuracy": 0.5477941176470589,
+      "brier": 0.2447019006724421,
+      "logloss": 0.6821926479377459,
+      "margin_mae": 10.587773589650805,
+      "total_mae": 11.468669146888312,
+      "ats_accuracy": 0.5542635658914729,
+      "ats_n": 258,
+      "ou_accuracy": 0.5037037037037037,
+      "ou_n": 270,
+      "calibration": [
+        {
+          "bin_center": 0.35000000000000003,
+          "predicted": 0.377383221662919,
+          "observed": 0.4482758620689655,
+          "count": 87
+        },
+        {
+          "bin_center": 0.45,
+          "predicted": 0.4635037485038858,
+          "observed": 0.5567010309278351,
+          "count": 97
+        },
+        {
+          "bin_center": 0.55,
+          "predicted": 0.5753278765456354,
+          "observed": 0.64,
+          "count": 75
+        },
+        {
+          "bin_center": 0.6500000000000001,
+          "predicted": 0.625,
+          "observed": 0.5,
+          "count": 4
+        },
+        {
+          "bin_center": 0.75,
+          "predicted": 0.7106357694592988,
+          "observed": 0.8888888888888888,
+          "count": 9
+        }
+      ],
+      "elo_accuracy": 0.5772058823529411,
+      "elo_brier": 0.24428924922294712,
+      "elo_ats_accuracy": 0.49224806201550386,
+      "meta_weights": {
+        "lightgbm": 0.5369812901350481,
+        "hgb": 0.1366435429345334
+      }
+    },
+    {
+      "season": 2024,
+      "n_games": 272,
+      "accuracy": 0.6433823529411765,
+      "brier": 0.23265887451470568,
+      "logloss": 0.6572557175202678,
+      "margin_mae": 10.350916304700593,
+      "total_mae": 10.248835984190414,
+      "ats_accuracy": 0.5074626865671642,
+      "ats_n": 268,
+      "ou_accuracy": 0.516728624535316,
+      "ou_n": 269,
+      "calibration": [
+        {
+          "bin_center": 0.15000000000000002,
+          "predicted": 0.125,
+          "observed": 0.0,
+          "count": 2
+        },
+        {
+          "bin_center": 0.35000000000000003,
+          "predicted": 0.38548728866125137,
+          "observed": 0.35365853658536583,
+          "count": 82
+        },
+        {
+          "bin_center": 0.45,
+          "predicted": 0.4850233317230196,
+          "observed": 0.46875,
+          "count": 64
+        },
+        {
+          "bin_center": 0.55,
+          "predicted": 0.5423056334583767,
+          "observed": 0.680672268907563,
+          "count": 119
+        },
+        {
+          "bin_center": 0.75,
+          "predicted": 0.7217391304347827,
+          "observed": 1.0,
+          "count": 5
+        }
+      ],
+      "elo_accuracy": 0.6617647058823529,
+      "elo_brier": 0.2187610443477108,
+      "elo_ats_accuracy": 0.4701492537313433,
+      "meta_weights": {
+        "lightgbm": 0.3299834955121866,
+        "hgb": 0.33725337253693893
+      }
+    },
+    {
+      "season": 2025,
+      "n_games": 272,
+      "accuracy": 0.6213235294117647,
+      "brier": 0.23031702575538898,
+      "logloss": 0.6519204177788657,
+      "margin_mae": 10.246496323919466,
+      "total_mae": 11.329382062303685,
+      "ats_accuracy": 0.5313653136531366,
+      "ats_n": 271,
+      "ou_accuracy": 0.5073529411764706,
+      "ou_n": 272,
+      "calibration": [
+        {
+          "bin_center": 0.25,
+          "predicted": 0.20000000000000004,
+          "observed": 0.0,
+          "count": 3
+        },
+        {
+          "bin_center": 0.35000000000000003,
+          "predicted": 0.3309262150317736,
+          "observed": 0.3939393939393939,
+          "count": 66
+        },
+        {
+          "bin_center": 0.45,
+          "predicted": 0.488508152690352,
+          "observed": 0.47,
+          "count": 100
+        },
+        {
+          "bin_center": 0.55,
+          "predicted": 0.5598029221882435,
+          "observed": 0.654320987654321,
+          "count": 81
+        },
+        {
+          "bin_center": 0.6500000000000001,
+          "predicted": 0.6761984106891398,
+          "observed": 0.8333333333333334,
+          "count": 12
+        },
+        {
+          "bin_center": 0.75,
+          "predicted": 0.7528089887640449,
+          "observed": 1.0,
+          "count": 10
+        }
+      ],
+      "elo_accuracy": 0.6139705882352942,
+      "elo_brier": 0.23915562775240176,
+      "elo_ats_accuracy": 0.46863468634686345,
+      "meta_weights": {
+        "lightgbm": 0.11645198111072326,
+        "hgb": 0.5579330825311151
+      }
+    }
+  ]
+}

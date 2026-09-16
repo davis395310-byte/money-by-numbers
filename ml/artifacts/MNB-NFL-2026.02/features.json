@@ -1,0 +1,15 @@
+{
+  "feature_names": [
+    "elo_diff",
+    "off_form_diff",
+    "def_form_diff",
+    "net_form_diff",
+    "streak_diff",
+    "rest_diff",
+    "div_game",
+    "dome",
+    "neutral",
+    "h2h_margin_avg",
+    "week"
+  ]
+}

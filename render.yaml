@@ -1,0 +1,35 @@
+# Render Blueprint — MONEY BY NUMBERS backend (free tier).
+#
+# Deploy: Render dashboard → New → Blueprint → point at this repo.
+# The frontend deploys to Vercel separately (see docs/zero-dollar-launch.md):
+#   - Root Directory: frontend/
+#   - Env var: NEXT_PUBLIC_API_URL = <this service's public URL>
+#
+# Env vars marked `sync: false` must be filled in the Render dashboard at
+# deploy time — they are never committed to the repo.
+
+services:
+  - type: web
+    name: mnb-backend
+    runtime: docker
+    plan: free
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    healthCheckPath: /api/health
+    envVars:
+      - key: ENVIRONMENT
+        value: production
+      # Atlas connection string (mongodb+srv://mnb_app:***@mnb-production...).
+      - key: MONGODB_URI
+        sync: false
+      # Comma-separated frontend origin(s), e.g. https://money-by-numbers.vercel.app
+      # Production refuses to boot with a wildcard or localhost CORS origin.
+      - key: CORS_ORIGINS
+        sync: false
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: ADMIN_API_KEY
+        generateValue: true
+      # Optional — the stored-edges fallback serves Best Bets without it.
+      - key: ODDS_API_KEY
+        sync: false

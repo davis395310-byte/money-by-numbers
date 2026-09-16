@@ -1,0 +1,341 @@
+{
+  "aggregation_note": "accuracy/brier/logloss/mae values in this artifact file are MACRO averages (mean of per-season fold values), NOT pooled correct/total. See pooled_correct_* fields for exact pooled numerators. ATS and O/U accuracies are genuinely pooled.",
+  "ats": {
+    "accuracy_macro_reported": 0.5066045066045066,
+    "accuracy_pooled": 0.5066045066045066,
+    "correct": 1304,
+    "method": "pooled (weighted by n); pushes excluded from n",
+    "total": 2574
+  },
+  "backtest_protocol": {
+    "calibration": "IsotonicRegression(out_of_bounds='clip'), fit on last 20% (chronological) of each training fold; never on test season",
+    "folds": "one per season 2016-2025; train = all final regular-season games with season < Y; features warmed from 1999",
+    "leakage_harness": "ml.leakage.KickoffLeakageHarness: _data_through < kickoff per row; per-fold max-train-kickoff < min-test-kickoff; truncation-invariance tests in tests/test_ml.py",
+    "market_lines": "nflverse spread_line/total_line (closing, PFR source) used ONLY for ATS/O-U grading; never model inputs",
+    "retraining": "per-season refit inside each fold; no per-week or per-game retraining",
+    "target": "home_win in {1,0}; 1 iff home_score > away_score (ties encoded 0); winner predicted home iff calibrated P(home) >= 0.5"
+  },
+  "calibration_bins_pooled_across_folds": [
+    {
+      "avg_predicted": 0.0075,
+      "bin_center": 0.05,
+      "n": 12,
+      "observed": 0.3333
+    },
+    {
+      "avg_predicted": 0.1589,
+      "bin_center": 0.15,
+      "n": 38,
+      "observed": 0.4211
+    },
+    {
+      "avg_predicted": 0.2682,
+      "bin_center": 0.25,
+      "n": 59,
+      "observed": 0.2881
+    },
+    {
+      "avg_predicted": 0.3586,
+      "bin_center": 0.35,
+      "n": 382,
+      "observed": 0.3796
+    },
+    {
+      "avg_predicted": 0.4704,
+      "bin_center": 0.45,
+      "n": 598,
+      "observed": 0.495
+    },
+    {
+      "avg_predicted": 0.5567,
+      "bin_center": 0.55,
+      "n": 851,
+      "observed": 0.5711
+    },
+    {
+      "avg_predicted": 0.6297,
+      "bin_center": 0.65,
+      "n": 408,
+      "observed": 0.6176
+    },
+    {
+      "avg_predicted": 0.7355,
+      "bin_center": 0.75,
+      "n": 258,
+      "observed": 0.7519
+    },
+    {
+      "avg_predicted": 0.8506,
+      "bin_center": 0.85,
+      "n": 22,
+      "observed": 0.8636
+    },
+    {
+      "avg_predicted": 0.959,
+      "bin_center": 0.95,
+      "n": 11,
+      "observed": 0.7273
+    }
+  ],
+  "elo_baseline_mnb_nfl_2026_01": {
+    "accuracy_macro_reported": 0.6216325021706101,
+    "accuracy_pooled": 0.6214475179992421,
+    "brier_macro": 0.2344,
+    "correct_pooled": 1640,
+    "formula": "P(home)=1/(1+10^(-(elo_diff+35)/400)); elo_diff home-away, K=20, margin multiplier (|m|+3)^0.8/(7.5+0.006|diff|)",
+    "status": "CHAMPION / production (backend/app/edges/engine.py:24)",
+    "total": 2639
+  },
+  "ensemble_mnb_nfl_2026_02": {
+    "accuracy_macro_reported": 0.5947132081614934,
+    "accuracy_pooled": 0.5949223190602501,
+    "ats_accuracy": 0.5066045066045066,
+    "ats_n": 2574,
+    "base_learner_hyperparameters": {
+      "hgb": {
+        "l2_regularization": 1.0,
+        "learning_rate": 0.05,
+        "max_iter": 400,
+        "max_leaf_nodes": 31,
+        "min_samples_leaf": 40,
+        "random_state": 42
+      },
+      "lightgbm": {
+        "colsample_bytree": 0.8,
+        "learning_rate": 0.03,
+        "min_child_samples": 40,
+        "n_estimators": 400,
+        "num_leaves": 31,
+        "random_state": 42,
+        "reg_lambda": 1.0,
+        "subsample": 0.8,
+        "verbose": -1
+      }
+    },
+    "base_learners": [
+      "lightgbm",
+      "hgb"
+    ],
+    "brier_macro": 0.2370863760075043,
+    "catboost_note": "no CatBoost code exists anywhere in the repository",
+    "catboost_used": false,
+    "correct_pooled": 1570,
+    "ensemble_method": "stacking: LogisticRegression(max_iter=1000, sklearn defaults) on chronological TimeSeriesSplit(n_splits=3) out-of-fold P(home); margin/total via Ridge(alpha=1.0, positive=True) weights normalized to sum 1",
+    "features": [
+      "elo_diff",
+      "off_form_diff",
+      "def_form_diff",
+      "net_form_diff",
+      "streak_diff",
+      "rest_diff",
+      "div_game",
+      "dome",
+      "neutral",
+      "h2h_margin_avg",
+      "week"
+    ],
+    "logloss_macro": 0.7062236540238869,
+    "margin_mae_macro": 10.5702275882958,
+    "n_games": 2639,
+    "ou_accuracy": 0.49388846447669976,
+    "ou_n": 2618,
+    "status": "challenger - did NOT beat the Elo baseline (accuracy_vs_elo_baseline = -0.0269)",
+    "total_mae_macro": 11.394234462032175,
+    "vs_elo_baseline_macro_pp": -2.691929400911663,
+    "xgboost_note": "XGBoost wrapper code exists (ml/models.py) but was NOT in the recorded learner list for this run",
+    "xgboost_used": false
+  },
+  "evaluation_window": "2016-2025 regular seasons, walk-forward",
+  "game_level_predictions": "MNB_2016_2025_game_predictions.csv (this audit folder); per-game probabilities regenerated by re-running the identical walk-forward pipeline - see reproduction note in MNB_2016_2025_backtest_report.md",
+  "generated_from": "ml/artifacts/backtest_2016_2025.json (read 2026-09-09)",
+  "model_under_audit": "MNB-NFL-2026.02 (stacked ensemble: LightGBM + HistGradientBoosting, logistic-regression stacker, isotonic calibration)",
+  "ou": {
+    "accuracy_pooled": 0.49388846447669976,
+    "correct": 1293,
+    "method": "pooled (weighted by n); pushes excluded from n",
+    "total": 2618
+  },
+  "per_season": [
+    {
+      "accuracy": 0.60546875,
+      "ats_accuracy": 0.5099601593625498,
+      "ats_n": 251,
+      "correct": 155,
+      "elo_accuracy": 0.6015625,
+      "n": 256,
+      "season": 2016,
+      "ou_accuracy": 0.42745098039215684,
+      "ou_n": 255
+    },
+    {
+      "accuracy": 0.5703125,
+      "ats_accuracy": 0.4879032258064516,
+      "ats_n": 248,
+      "correct": 146,
+      "elo_accuracy": 0.65234375,
+      "n": 256,
+      "season": 2017,
+      "ou_accuracy": 0.51171875,
+      "ou_n": 256
+    },
+    {
+      "accuracy": 0.61328125,
+      "ats_accuracy": 0.5384615384615384,
+      "ats_n": 247,
+      "correct": 157,
+      "elo_accuracy": 0.6328125,
+      "n": 256,
+      "season": 2018,
+      "ou_accuracy": 0.5177865612648221,
+      "ou_n": 253
+    },
+    {
+      "accuracy": 0.578125,
+      "ats_accuracy": 0.45528455284552843,
+      "ats_n": 246,
+      "correct": 148,
+      "elo_accuracy": 0.62890625,
+      "n": 256,
+      "season": 2019,
+      "ou_accuracy": 0.49411764705882355,
+      "ou_n": 255
+    },
+    {
+      "accuracy": 0.5703125,
+      "ats_accuracy": 0.4921875,
+      "ats_n": 256,
+      "correct": 146,
+      "elo_accuracy": 0.625,
+      "n": 256,
+      "season": 2020,
+      "ou_accuracy": 0.450199203187251,
+      "ou_n": 251
+    },
+    {
+      "accuracy": 0.5772058823529411,
+      "ats_accuracy": 0.47761194029850745,
+      "ats_n": 268,
+      "correct": 157,
+      "elo_accuracy": 0.6323529411764706,
+      "n": 272,
+      "season": 2021,
+      "ou_accuracy": 0.5427509293680297,
+      "ou_n": 269
+    },
+    {
+      "accuracy": 0.6199261992619925,
+      "ats_accuracy": 0.5095785440613027,
+      "ats_n": 261,
+      "correct": 168,
+      "elo_accuracy": 0.5904059040590406,
+      "n": 271,
+      "season": 2022,
+      "ou_accuracy": 0.4626865671641791,
+      "ou_n": 268
+    },
+    {
+      "accuracy": 0.5477941176470589,
+      "ats_accuracy": 0.5542635658914729,
+      "ats_n": 258,
+      "correct": 149,
+      "elo_accuracy": 0.5772058823529411,
+      "n": 272,
+      "season": 2023,
+      "ou_accuracy": 0.5037037037037037,
+      "ou_n": 270
+    },
+    {
+      "accuracy": 0.6433823529411765,
+      "ats_accuracy": 0.5074626865671642,
+      "ats_n": 268,
+      "correct": 175,
+      "elo_accuracy": 0.6617647058823529,
+      "n": 272,
+      "season": 2024,
+      "ou_accuracy": 0.516728624535316,
+      "ou_n": 269
+    },
+    {
+      "accuracy": 0.6213235294117647,
+      "ats_accuracy": 0.5313653136531366,
+      "ats_n": 271,
+      "correct": 169,
+      "elo_accuracy": 0.6139705882352942,
+      "n": 272,
+      "season": 2025,
+      "ou_accuracy": 0.5073529411764706,
+      "ou_n": 272
+    }
+  ],
+  "reported_61_83_percent": {
+    "appears_in_artifacts": false,
+    "appears_in_code": false,
+    "appears_in_docs": false,
+    "appears_in_logs": false,
+    "status": "NOT VERIFIED",
+    "verdict_detail": "A workspace-wide grep (excluding vendored venv packages) found zero occurrences of 61.83 / 0.6183 in any project file. The figure exists only as a conversational reference ('the earlier approximate benchmark'). No numerator, denominator, model, or sample is on record for it. It cannot be verified, partially or otherwise.",
+    "workspace_grep": "grep -rn '61\\.83\\|0\\.6183' --exclude-dir=.venv --exclude-dir=node_modules --exclude-dir=.git money-by-numbers/ nfl-model-research/ nfl-week1-backtest/ -> no project hits"
+  },
+  "research_candidates_separate_lineage": {
+    "candidates": {
+      "elo_replicated": {
+        "accuracy": 0.6218,
+        "note": "replicates MNB-NFL-2026.01 within 0.02pp"
+      },
+      "lgbm_factors": {
+        "accuracy": 0.6192,
+        "note": "did NOT beat Elo"
+      },
+      "logreg_elo_spread_market_informed": {
+        "accuracy": 0.6673,
+        "note": "uses closing spread as a feature - market-informed, NOT a deployable prediction edge; reported separately"
+      },
+      "logreg_factors": {
+        "accuracy": 0.6377,
+        "brier": 0.2229,
+        "note": "calibrated logistic on Elo + research factors (EPA, success rate, ypp, sacks, explosives, 3rd down, red zone, regressed turnovers, QB adj, rest, travel, dome, division, week); leakage audit passed; NOT promoted to production"
+      },
+      "logreg_spread_only": {
+        "accuracy": 0.6654,
+        "note": "closing spread alone - demonstrates market efficiency"
+      }
+    },
+    "n_games": 2639,
+    "source": "~/workspace/nfl-model-research/results.json",
+    "status": "independent research lineage; not the production model"
+  },
+  "additional_audit_findings_2026_09_09": {
+    "bug_006_train_py_docstring": {
+      "location": "ml/train.py:7-8 vs :44,:96",
+      "finding": "Module docstring says the final production model trains on 2016-2025, but TRAIN_SEASONS=range(1999,2026) trains on 1999-2025.",
+      "severity": "low",
+      "impact": "Training window is the code value (1999-2025); metadata.json records '1999-2025 regular seasons' correctly. Docstring is stale."
+    },
+    "verification_tests_run": [
+      {
+        "name": "tests/test_ml.py (20 tests: elo update zero-sum, hand-checked feature values, check_feature_frame, check_truncation_invariance, poison-future invariance, calibration gates)",
+        "status": "PASS",
+        "details": "20/20 passed when run by the ML-inventory worker on 2026-09-09."
+      },
+      {
+        "name": "tests/test_market.py",
+        "status": "NOT RUN",
+        "details": "File exists but was not executed; betting formulas were instead verified by direct function execution (engine.py, settle.py)."
+      }
+    ],
+    "meta_weights_note": "Stacking probability-head weights are raw LogisticRegression coefficients, NOT constrained to be positive or sum to 1 (e.g. 2016 fold: {lightgbm: 0.9401, hgb: -0.1840}). Only the margin/total WeightedAverageRegressor weights are non-negative and normalized.",
+    "not_verified": [
+      "Live MongoDB registry state: champion flag is code-declared in backend/scripts/register_elo_champion.py (sets champion:true on MNB-NFL-2026.01, false on MNB-NFL-2026.02), not DB-confirmed.",
+      "Which of the two live CLV definitions (settle.py prob/point-based vs routers/odds.py American-cents) the frontend displays.",
+      "2026.01 has no artifacts directory in ml/artifacts/ (only MNB-NFL-2026.02/ + backtest_2016_2025.json); its registration exists in the registration script and nfl-week1-backtest/model_meta.json.",
+      "The research logistic candidate (63.77%) is not wired into production ml/; no code path promotes it to champion."
+    ]
+  },
+  "reproduction_verdict": {
+    "status": "VERIFIED",
+    "detail": "python3 -m ml.run_backtest re-run 2026-09-09, EXIT=0; regenerated ml/artifacts/backtest_2016_2025.json is byte-identical to the original (md5 454d3767c33b334fb87749ee5f90dc41; 0 field mismatches across all 14 aggregate fields and all 10 folds). Original secured at ~/workspace/mnb_audit/backtest_2016_2025_ORIGINAL.json; run log at ~/workspace/mnb_audit/backtest_rerun2.log. Byte-identical regeneration altered no historical result.",
+    "leakage_harness": "PASS (zero violations; 4 documented leakage tests ran PASS; in-pipeline gate passed on the real 1999-2025 feature frame)",
+    "research_leakage_audit": "PASS (leakage_audit on 300 sampled games, 2,639 eval games, 17/17 pbp seasons)",
+    "research_exact_value_audit": "NOT RUN (numpy 2.x read-only-array crash in the audit code at model.py:595; not a leakage finding; source not modified)"
+  }
+}

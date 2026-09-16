@@ -1,0 +1,59 @@
+{
+  "version": "MNB-NFL-2026.02",
+  "training_period": "1999-2025 regular seasons",
+  "features": [
+    "elo_diff",
+    "off_form_diff",
+    "def_form_diff",
+    "net_form_diff",
+    "streak_diff",
+    "rest_diff",
+    "div_game",
+    "dome",
+    "neutral",
+    "h2h_margin_avg",
+    "week"
+  ],
+  "training_date": "2026-09-09T17:45:03Z",
+  "calibration": {
+    "train_brier_calibrated": 0.1760846096028989,
+    "train_logloss_calibrated": 0.5365630744904937
+  },
+  "performance": {
+    "train_accuracy": 0.8416822161619061
+  },
+  "learners": [
+    "lightgbm",
+    "hgb"
+  ],
+  "leakage_harness": "passed",
+  "walk_forward": {
+    "seasons": [
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025
+    ],
+    "n_games": 2639,
+    "accuracy": 0.5947132081614934,
+    "brier": 0.2370863760075043,
+    "logloss": 0.7062236540238869,
+    "margin_mae": 10.570227588295799,
+    "total_mae": 11.394234462032175,
+    "ats_accuracy": 0.5066045066045066,
+    "ats_n": 2574,
+    "ou_accuracy": 0.49388846447669976,
+    "ou_n": 2618,
+    "elo_accuracy": 0.6216325021706101,
+    "elo_brier": 0.23443151688295433,
+    "accuracy_vs_elo_baseline": -0.026919294009116634,
+    "note": "2016-2025 walk-forward. The ensemble did NOT beat the Elo baseline on winner accuracy (-2.69pp). ATS vs closing lines 50.7% (n=2574): no demonstrated edge vs the market."
+  },
+  "notes": "Production ensemble v2 (LightGBM + HGB stacking, isotonic calibration). Walk-forward 2016-2025: 59.47% winner accuracy vs 62.16% Elo baseline. No improvement claim is made."
+}

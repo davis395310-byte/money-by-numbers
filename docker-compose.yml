@@ -1,0 +1,56 @@
+# MONEY BY NUMBERS — docker-compose
+#
+# Phase 1: service structure only. backend/ and frontend/ are built in
+# parallel; this file defines how they will be composed.
+#
+# PRODUCTION NOTE: production needs real secrets. This file contains NO
+# secret values — only references. Copy .env.example to .env and fill in
+# every REQUIRED CONFIG variable before running outside of local dev.
+# Consider using a dedicated compose override or profiles for production
+# (e.g. `profiles: ["prod"]` on production-only services).
+
+services:
+  mongodb:
+    image: mongo:7
+    restart: unless-stopped
+    volumes:
+      - mongodb_data:/data/db
+    healthcheck:
+      # --quiet keeps logs clean; exit code reflects server reachability.
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+
+  backend:
+    build: ./backend
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    # The backend service is being built in parallel; if ./backend has no
+    # Dockerfile yet, `docker compose build backend` will fail. That is
+    # expected in Phase 1 scaffolding.
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8000}
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    # The frontend service is being built in parallel; if ./frontend has no
+    # Dockerfile yet, `docker compose build frontend` will fail. That is
+    # expected in Phase 1 scaffolding.
+
+volumes:
+  mongodb_data:
+    name: money-by-numbers-mongodb-data
