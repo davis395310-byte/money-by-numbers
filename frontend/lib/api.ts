@@ -596,3 +596,59 @@ export function formatPrice(price: PlanPrice): string {
   const interval = price.interval ? `/${price.interval}` : "";
   return `$${dollars} ${price.currency ?? ""}${interval}`.trim();
 }
+
+// ---------------------------------------------------------------------------
+// Predictions + tipping-point explainers (paid tier).
+// Shapes mirror backend/app/routers/predictions.py. Explainers are joined
+// at read time only for requesters with paid access (or everyone while
+// YEAR_ONE_FREE is on); otherwise the API omits them and says why.
+// ---------------------------------------------------------------------------
+
+/** One structured tipping point behind a pick. */
+export interface TippingPoint {
+  factor: string;
+  label: string;
+  detail: string;
+  value: number;
+}
+
+/** One locked prediction, optionally with its paid-tier explainer. */
+export interface Prediction {
+  prediction_id: string;
+  game_id: string;
+  season: number;
+  week: number;
+  home_team: string;
+  away_team: string;
+  model_version: string;
+  model_probability: number;
+  predicted_winner: string;
+  predicted_home_score: number | null;
+  predicted_away_score: number | null;
+  confidence: string;
+  created_at: string;
+  /** Paid tier only: 2-3 sentences on the tipping points behind the pick. */
+  explainer?: string | null;
+  /** Paid tier only: the structured tipping points. */
+  tipping_points?: TippingPoint[];
+}
+
+export interface PredictionsResponse {
+  status: string;
+  reason?: string;
+  predictions: Prediction[];
+  explainer_access?: { granted: boolean; reason: string };
+}
+
+export function fetchPredictions(
+  season: number,
+  week: number,
+  includeExplainer = true,
+): Promise<PredictionsResponse | null> {
+  const params = new URLSearchParams({
+    season: String(season),
+    week: String(week),
+    include_explainer: includeExplainer ? "true" : "false",
+  });
+  return get<PredictionsResponse>(`/api/predictions?${params.toString()}`);
+}

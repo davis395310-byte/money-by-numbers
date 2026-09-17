@@ -1,0 +1,332 @@
+{
+ "season": 2026,
+ "week": 1,
+ "generated_at": "2026-09-17T03:38:52.507764+00:00",
+ "model_version": "MNB-NFL-2026.01",
+ "affiliate_ctas_enabled": false,
+ "affiliate_note": "No sportsbook partnerships configured \u2014 affiliate CTAs are OFF. Posts contain no sportsbook links until partnerships exist.",
+ "posts": [
+  {
+   "game_id": "2026_01_NE_SEA",
+   "matchup": "NE @ SEA",
+   "pick": "SEA",
+   "pick_full": "Seattle Seahawks",
+   "model_probability": 0.7153,
+   "confidence": "high",
+   "tipping_point": "125-pt rating gap + home field",
+   "posts": {
+    "x": "LOCKED: our model takes the Seattle Seahawks (SEA) at 71.5% [high]. Tipping point: 125-pt rating gap + home field. The full why behind every pick -> https://money-by-numbers-6b196obbd-money-by-numbers.vercel.app/pro #NFL #NFLPicks #FootballAnalytics #MoneyByNumbers",
+    "video_caption": "The numbers say Seattle Seahawks. 71.5% \u2014 high confidence. Why? The model takes Seattle Seahawks at 71.5% (high confidence). The tipping point is a 125-point rating gap \u2014 Seattle Seahawks rated far stronger \u2014 and home field only widens it. Every pick, every tipping point -> link in bio. #NFL #NFLPicks #FootballAnalytics #MoneyByNumbers"
+   },
+   "affiliate_cta": null,
+   "graphic": "pick_2026_01_ne_sea.png"
+  },
+  {
+   "game_id": "2026_01_SF_LA",
+   "matchup": "SF @ LA",
+   "pick": "LA",
+   "pick_full": "Los Angeles Rams",
+   "model_probability": 0.5899,
+   "confidence": "medium",
+   "tipping_point": "28-pt rating gap + home field",
+   "posts": {
+    "x": "LOCKED: our model takes the Los Angeles Rams (LA) at 59.0% [medium]. Tipping point: 28-pt rating gap + home field. The full why behind every pick -> https://money-by-numbers-6b196obbd-money-by-numbers.vercel.app/pro #NFL #NFLPicks #FootballAnalytics #MoneyByNumbers",
+    "video_caption": "The numbers say Los Angeles Rams. 59.0% \u2014 medium confidence. Why? The model takes Los Angeles Rams at 59.0% (medium confidence). The tipping point is a 28-point rating gap in Los Angeles Rams' favor, with home field adding the usual edge. The market is warmer on this one: books price Los Angeles Rams at 66% versus the model's 59.0%. Every pick, every tipping point -> link in bio. #NFL #NFLPicks #FootballAnalytics #MoneyByNumbers"
+   },
+   "affiliate_cta": null,
+   "graphic": "pick_2026_01_sf_la.png"
+  },
+  {
+   "game_id": "2026_01_CHI_CAR",
+   "matchup": "CHI @ CAR",
+   "pick": "CHI",
+   "pick_full": "Chicago Bears",
+   "model_probability": 0.6441,
+   "confidence": "medium",
+   "tipping_point": "138-pt rating gap overcomes home field",
+   "posts": {
+    "x": "LOCKED: our model takes the Chicago Bears (CHI) at 64.4% [medium]. Tipping point: 138-pt rating gap overcomes home field. The full why behind every pick -> https://money-by-numbers-6b196obbd-money-by-numbers.vercel.app/pro #NFL #NFLPicks #FootballAnalytics #MoneyByNumbers",
+    "video_caption": "The numbers say Chicago Bears. 64.4% \u2014 medium confidence. Why? The model takes Chicago Bears at 64.4% (medium confidence). The tipping point is a 138-point rating gap for Chicago Bears \u2014 big enough to overcome Carolina Panthers' home-field edge. The market agrees \u2014 books price Chicago Bears at 63%, right in line with the model. Every pick, every tipping point -> link in bio. #NFL #NFLPicks #FootballAnalytics #MoneyByNumbers"
+   },
+   "affiliate_cta": null,
+   "graphic": "pick_2026_01_chi_car.png"
+  },
+  {
+   "game_id": "2026_01_TB_CIN",
+   "matchup": "TB @ CIN",
+   "pick": "TB",
+   "pick_full": "Tampa Bay Buccaneers",
+   "model_probability": 0.5204,
+   "confidence": "low",
+   "tipping_point": "49-pt rating gap overcomes home field",
+   "posts": {
+    "x": "LOCKED: our model takes the Tampa Bay Buccaneers (TB) at 52.0% [low]. Tipping point: 49-pt rating gap overcomes home field. The full why behind every pick -> https://money-by-numbers-6b196obbd-money-by-numbers.vercel.app/pro #NFL #NFLPicks #FootballAnalytics #MoneyByNumbers",
+    "video_caption": "The numbers say Tampa Bay Buccaneers. 52.0% \u2014 low confidence. Why? The model takes Tampa Bay Buccaneers at 52.0% (low confidence). The tipping point is a 49-point rating gap for Tampa Bay Buccaneers \u2014 big enough to overcome Cincinnati Bengals' home-field edge. The market is cooler on this one: books price Tampa Bay Buccaneers at 37% versus the model's 52.0%. Every pick, every tipping point -> link in bio. #NFL #NFLPicks #FootballAnalytics #MoneyByNumbers"
+   },
+   "affiliate_cta": null,
+   "graphic": "pick_2026_01_tb_cin.png"
+  },
+  {
+   "game_id": "2026_01_NO_DET",
+   "matchup": "NO @ DET",
+   "pick": "DET",
+   "pick_full": "Detroit Lions",
+   "model_probability": 0.778,
+   "confidence": "high",
+   "tipping_point": "183-pt rating gap + home field",
+   "posts": {
+    "x": "LOCKED: our model takes the Detroit Lions (DET) at 77.8% [high]. Tipping point: 183-pt rating gap + home field. The full why behind every pick -> https://money-by-numbers-6b196obbd-money-by-numbers.vercel.app/pro #NFL #NFLPicks #FootballAnalytics #MoneyByNumbers",
+    "video_caption": "The numbers say Detroit Lions. 77.8% \u2014 high confidence. Why? The model takes Detroit Lions at 77.8% (high confidence). The tipping point is a 183-point rating gap \u2014 Detroit Lions rated far stronger \u2014 and home field only widens it. The market agrees \u2014 books price Detroit Lions at 76%, right in line with the model. Every pick, every tipping point -> link in bio. #NFL #NFLPicks #FootballAnalytics #MoneyByNumbers"
+   },
+   "affiliate_cta": null,
+   "graphic": "pick_2026_01_no_det.png"
+  },
+  {
+   "game_id": "2026_01_BUF_HOU",
+   "matchup": "BUF @ HOU",
+   "pick": "BUF",
+   "pick_full": "Buffalo Bills",
+   "model_probability": 0.7241,
+   "confidence": "high",
+   "tipping_point": "203-pt rating gap overcomes home field",
+   "posts": {
+    "x": "LOCKED: our model takes the Buffalo Bills (BUF) at 72.4% [high]. Tipping point: 203-pt rating gap overcomes home field. The full why behind every pick -> https://money-by-numbers-6b196obbd-money-by-numbers.vercel.app/pro #NFL #NFLPicks #FootballAnalytics #MoneyByNumbers",
+    "video_caption": "The numbers say Buffalo Bills. 72.4% \u2014 high confidence. Why? The model takes Buffalo Bills at 72.4% (high confidence). The tipping point is a 203-point rating gap for Buffalo Bills \u2014 big enough to overcome Houston Texans' home-field edge. The market is cooler on this one: books price Buffalo Bills at 55% versus the model's 72.4%. Every pick, every tipping point -> link in bio. #NFL #NFLPicks #FootballAnalytics #MoneyByNumbers"
+   },
+   "affiliate_cta": null,
+   "graphic": "pick_2026_01_buf_hou.png"
+  },
+  {
+   "game_id": "2026_01_BAL_IND",
+   "matchup": "BAL @ IND",
+   "pick": "BAL",
+   "pick_full": "Baltimore Ravens",
+   "model_probability": 0.7299,
+   "confidence": "high",
+   "tipping_point": "208-pt rating gap overcomes home field",
+   "posts": {
+    "x": "LOCKED: our model takes the Baltimore Ravens (BAL) at 73.0% [high]. Tipping point: 208-pt rating gap overcomes home field. The full why behind every pick -> https://money-by-numbers-6b196obbd-money-by-numbers.vercel.app/pro #NFL #NFLPicks #FootballAnalytics #MoneyByNumbers",
+    "video_caption": "The numbers say Baltimore Ravens. 73.0% \u2014 high confidence. Why? The model takes Baltimore Ravens at 73.0% (high confidence). The tipping point is a 208-point rating gap for Baltimore Ravens \u2014 big enough to overcome Indianapolis Colts' home-field edge. The market is cooler on this one: books price Baltimore Ravens at 64% versus the model's 73.0%. Every pick, every tipping point -> link in bio. #NFL #NFLPicks #FootballAnalytics #MoneyByNumbers"
+   },
+   "affiliate_cta": null,
+   "graphic": "pick_2026_01_bal_ind.png"
+  },
+  {
+   "game_id": "2026_01_CLE_JAX",
+   "matchup": "CLE @ JAX",
+   "pick": "JAX",
+   "pick_full": "Jacksonville Jaguars",
+   "model_probability": 0.6958,
+   "confidence": "high",
+   "tipping_point": "109-pt rating gap + home field",
+   "posts": {
+    "x": "LOCKED: our model takes the Jacksonville Jaguars (JAX) at 69.6% [high]. Tipping point: 109-pt rating gap + home field. The full why behind every pick -> https://money-by-numbers-6b196obbd-money-by-numbers.vercel.app/pro #NFL #NFLPicks #FootballAnalytics #MoneyByNumbers",
+    "video_caption": "The numbers say Jacksonville Jaguars. 69.6% \u2014 high confidence. Why? The model takes Jacksonville Jaguars at 69.6% (high confidence). The tipping point is a 109-point rating gap \u2014 Jacksonville Jaguars rated far stronger \u2014 and home field only widens it. The market is warmer on this one: books price Jacksonville Jaguars at 81% versus the model's 69.6%. Every pick, every tipping point -> link in bio. #NFL #NFLPicks #FootballAnalytics #MoneyByNumbers"
+   },
+   "affiliate_cta": null,
+   "graphic": "pick_2026_01_cle_jax.png"
+  },
+  {
+   "game_id": "2026_01_ATL_PIT",
+   "matchup": "ATL @ PIT",
+   "pick": "PIT",
+   "pick_full": "Pittsburgh Steelers",
+   "model_probability": 0.7443,
+   "confidence": "high",
+   "tipping_point": "151-pt rating gap + home field",
+   "posts": {
+    "x": "LOCKED: our model takes the Pittsburgh Steelers (PIT) at 74.4% [high]. Tipping point: 151-pt rating gap + home field. The full why behind every pick -> https://money-by-numbers-6b196obbd-money-by-numbers.vercel.app/pro #NFL #NFLPicks #FootballAnalytics #MoneyByNumbers",
+    "video_caption": "The numbers say Pittsburgh Steelers. 74.4% \u2014 high confidence. Why? The model takes Pittsburgh Steelers at 74.4% (high confidence). The tipping point is a 151-point rating gap \u2014 Pittsburgh Steelers rated far stronger \u2014 and home field only widens it. The market is cooler on this one: books price Pittsburgh Steelers at 64% versus the model's 74.4%. Every pick, every tipping point -> link in bio. #NFL #NFLPicks #FootballAnalytics #MoneyByNumbers"
+   },
+   "affiliate_cta": null,
+   "graphic": "pick_2026_01_atl_pit.png"
+  },
+  {
+   "game_id": "2026_01_NYJ_TEN",
+   "matchup": "NYJ @ TEN",
+   "pick": "TEN",
+   "pick_full": "Tennessee Titans",
+   "model_probability": 0.5484,
+   "confidence": "low",
+   "tipping_point": "home field tips it \u2014 rating gap favors the...",
+   "posts": {
+    "x": "LOCKED: our model takes the Tennessee Titans (TEN) at 54.8% [low]. Tipping point: home field tips it \u2014 rating gap favors the.... The full why behind every pick -> https://money-by-numbers-6b196obbd-money-by-numbers.vercel.app/pro #NFL #NFLPicks #FootballAnalytics #MoneyByNumbers",
+    "video_caption": "The numbers say Tennessee Titans. 54.8% \u2014 low confidence. Why? The model takes Tennessee Titans at 54.8% (low confidence). The tipping point is home field itself \u2014 the rating gap actually favors New York Jets, but the home edge tips this one to Tennessee Titans. The market agrees \u2014 books price Tennessee Titans at 56%, right in line with the model. Every pick, every tipping point -> link in bio. #NFL #NFLPicks #FootballAnalytics #MoneyByNumbers"
+   },
+   "affiliate_cta": null,
+   "graphic": "pick_2026_01_nyj_ten.png"
+  },
+  {
+   "game_id": "2026_01_ARI_LAC",
+   "matchup": "ARI @ LAC",
+   "pick": "LAC",
+   "pick_full": "Los Angeles Chargers",
+   "model_probability": 0.7727,
+   "confidence": "high",
+   "tipping_point": "178-pt rating gap + home field",
+   "posts": {
+    "x": "LOCKED: our model takes the Los Angeles Chargers (LAC) at 77.3% [high]. Tipping point: 178-pt rating gap + home field. The full why behind every pick -> https://money-by-numbers-6b196obbd-money-by-numbers.vercel.app/pro #NFL #NFLPicks #FootballAnalytics #MoneyByNumbers",
+    "video_caption": "The numbers say Los Angeles Chargers. 77.3% \u2014 high confidence. Why? The model takes Los Angeles Chargers at 77.3% (high confidence). The tipping point is a 178-point rating gap \u2014 Los Angeles Chargers rated far stronger \u2014 and home field only widens it. The market is warmer on this one: books price Los Angeles Chargers at 84% versus the model's 77.3%. Every pick, every tipping point -> link in bio. #NFL #NFLPicks #FootballAnalytics #MoneyByNumbers"
+   },
+   "affiliate_cta": null,
+   "graphic": "pick_2026_01_ari_lac.png"
+  },
+  {
+   "game_id": "2026_01_MIA_LV",
+   "matchup": "MIA @ LV",
+   "pick": "MIA",
+   "pick_full": "Miami Dolphins",
+   "model_probability": 0.6437,
+   "confidence": "medium",
+   "tipping_point": "138-pt rating gap overcomes home field",
+   "posts": {
+    "x": "LOCKED: our model takes the Miami Dolphins (MIA) at 64.4% [medium]. Tipping point: 138-pt rating gap overcomes home field. The full why behind every pick -> https://money-by-numbers-6b196obbd-money-by-numbers.vercel.app/pro #NFL #NFLPicks #FootballAnalytics #MoneyByNumbers",
+    "video_caption": "The numbers say Miami Dolphins. 64.4% \u2014 medium confidence. Why? The model takes Miami Dolphins at 64.4% (medium confidence). The tipping point is a 138-point rating gap for Miami Dolphins \u2014 big enough to overcome Las Vegas Raiders' home-field edge. The market is cooler on this one: books price Miami Dolphins at 41% versus the model's 64.4%. Every pick, every tipping point -> link in bio. #NFL #NFLPicks #FootballAnalytics #MoneyByNumbers"
+   },
+   "affiliate_cta": null,
+   "graphic": "pick_2026_01_mia_lv.png"
+  },
+  {
+   "game_id": "2026_01_GB_MIN",
+   "matchup": "GB @ MIN",
+   "pick": "GB",
+   "pick_full": "Green Bay Packers",
+   "model_probability": 0.5179,
+   "confidence": "low",
+   "tipping_point": "47-pt rating gap overcomes home field",
+   "posts": {
+    "x": "LOCKED: our model takes the Green Bay Packers (GB) at 51.8% [low]. Tipping point: 47-pt rating gap overcomes home field. The full why behind every pick -> https://money-by-numbers-6b196obbd-money-by-numbers.vercel.app/pro #NFL #NFLPicks #FootballAnalytics #MoneyByNumbers",
+    "video_caption": "The numbers say Green Bay Packers. 51.8% \u2014 low confidence. Why? The model takes Green Bay Packers at 51.8% (low confidence). The tipping point is a 47-point rating gap for Green Bay Packers \u2014 big enough to overcome Minnesota Vikings' home-field edge. The market agrees \u2014 books price Green Bay Packers at 49%, right in line with the model. Every pick, every tipping point -> link in bio. #NFL #NFLPicks #FootballAnalytics #MoneyByNumbers"
+   },
+   "affiliate_cta": null,
+   "graphic": "pick_2026_01_gb_min.png"
+  },
+  {
+   "game_id": "2026_01_WAS_PHI",
+   "matchup": "WAS @ PHI",
+   "pick": "PHI",
+   "pick_full": "Philadelphia Eagles",
+   "model_probability": 0.8259,
+   "confidence": "high",
+   "tipping_point": "236-pt rating gap + home field",
+   "posts": {
+    "x": "LOCKED: our model takes the Philadelphia Eagles (PHI) at 82.6% [high]. Tipping point: 236-pt rating gap + home field. The full why behind every pick -> https://money-by-numbers-6b196obbd-money-by-numbers.vercel.app/pro #NFL #NFLPicks #FootballAnalytics #MoneyByNumbers",
+    "video_caption": "The numbers say Philadelphia Eagles. 82.6% \u2014 high confidence. Why? The model takes Philadelphia Eagles at 82.6% (high confidence). The tipping point is a 235-point rating gap \u2014 Philadelphia Eagles rated far stronger \u2014 and home field only widens it. The market is cooler on this one: books price Philadelphia Eagles at 70% versus the model's 82.6%. Every pick, every tipping point -> link in bio. #NFL #NFLPicks #FootballAnalytics #MoneyByNumbers"
+   },
+   "affiliate_cta": null,
+   "graphic": "pick_2026_01_was_phi.png"
+  },
+  {
+   "game_id": "2026_01_DAL_NYG",
+   "matchup": "DAL @ NYG",
+   "pick": "DAL",
+   "pick_full": "Dallas Cowboys",
+   "model_probability": 0.6454,
+   "confidence": "medium",
+   "tipping_point": "139-pt rating gap overcomes home field",
+   "posts": {
+    "x": "LOCKED: our model takes the Dallas Cowboys (DAL) at 64.5% [medium]. Tipping point: 139-pt rating gap overcomes home field. The full why behind every pick -> https://money-by-numbers-6b196obbd-money-by-numbers.vercel.app/pro #NFL #NFLPicks #FootballAnalytics #MoneyByNumbers",
+    "video_caption": "The numbers say Dallas Cowboys. 64.5% \u2014 medium confidence. Why? The model takes Dallas Cowboys at 64.5% (medium confidence). The tipping point is a 139-point rating gap for Dallas Cowboys \u2014 big enough to overcome New York Giants' home-field edge. The market is cooler on this one: books price Dallas Cowboys at 62% versus the model's 64.5%. Every pick, every tipping point -> link in bio. #NFL #NFLPicks #FootballAnalytics #MoneyByNumbers"
+   },
+   "affiliate_cta": null,
+   "graphic": "pick_2026_01_dal_nyg.png"
+  },
+  {
+   "game_id": "2026_01_DEN_KC",
+   "matchup": "DEN @ KC",
+   "pick": "KC",
+   "pick_full": "Kansas City Chiefs",
+   "model_probability": 0.6429,
+   "confidence": "medium",
+   "tipping_point": "67-pt rating gap + home field",
+   "posts": {
+    "x": "LOCKED: our model takes the Kansas City Chiefs (KC) at 64.3% [medium]. Tipping point: 67-pt rating gap + home field. The full why behind every pick -> https://money-by-numbers-6b196obbd-money-by-numbers.vercel.app/pro #NFL #NFLPicks #FootballAnalytics #MoneyByNumbers",
+    "video_caption": "The numbers say Kansas City Chiefs. 64.3% \u2014 medium confidence. Why? The model takes Kansas City Chiefs at 64.3% (medium confidence). The tipping point is a 67-point rating gap in Kansas City Chiefs' favor, with home field adding the usual edge. The market is cooler on this one: books price Kansas City Chiefs at 59% versus the model's 64.3%. Every pick, every tipping point -> link in bio. #NFL #NFLPicks #FootballAnalytics #MoneyByNumbers"
+   },
+   "affiliate_cta": null,
+   "graphic": "pick_2026_01_den_kc.png"
+  }
+ ],
+ "schedule": [
+  {
+   "game_id": "2026_01_NE_SEA",
+   "suggested_post_utc": "2026-09-08T12:00:00+00:00",
+   "slot": 1
+  },
+  {
+   "game_id": "2026_01_SF_LA",
+   "suggested_post_utc": "2026-09-08T12:00:00+00:00",
+   "slot": 2
+  },
+  {
+   "game_id": "2026_01_CHI_CAR",
+   "suggested_post_utc": "2026-09-08T12:00:00+00:00",
+   "slot": 3
+  },
+  {
+   "game_id": "2026_01_TB_CIN",
+   "suggested_post_utc": "2026-09-09T12:00:00+00:00",
+   "slot": 1
+  },
+  {
+   "game_id": "2026_01_NO_DET",
+   "suggested_post_utc": "2026-09-09T12:00:00+00:00",
+   "slot": 2
+  },
+  {
+   "game_id": "2026_01_BUF_HOU",
+   "suggested_post_utc": "2026-09-09T12:00:00+00:00",
+   "slot": 3
+  },
+  {
+   "game_id": "2026_01_BAL_IND",
+   "suggested_post_utc": "2026-09-10T12:00:00+00:00",
+   "slot": 1
+  },
+  {
+   "game_id": "2026_01_CLE_JAX",
+   "suggested_post_utc": "2026-09-10T12:00:00+00:00",
+   "slot": 2
+  },
+  {
+   "game_id": "2026_01_ATL_PIT",
+   "suggested_post_utc": "2026-09-10T12:00:00+00:00",
+   "slot": 3
+  },
+  {
+   "game_id": "2026_01_NYJ_TEN",
+   "suggested_post_utc": "2026-09-11T12:00:00+00:00",
+   "slot": 1
+  },
+  {
+   "game_id": "2026_01_ARI_LAC",
+   "suggested_post_utc": "2026-09-11T12:00:00+00:00",
+   "slot": 2
+  },
+  {
+   "game_id": "2026_01_MIA_LV",
+   "suggested_post_utc": "2026-09-11T12:00:00+00:00",
+   "slot": 3
+  },
+  {
+   "game_id": "2026_01_GB_MIN",
+   "suggested_post_utc": "2026-09-12T12:00:00+00:00",
+   "slot": 1
+  },
+  {
+   "game_id": "2026_01_WAS_PHI",
+   "suggested_post_utc": "2026-09-12T12:00:00+00:00",
+   "slot": 2
+  },
+  {
+   "game_id": "2026_01_DAL_NYG",
+   "suggested_post_utc": "2026-09-12T12:00:00+00:00",
+   "slot": 3
+  },
+  {
+   "game_id": "2026_01_DEN_KC",
+   "suggested_post_utc": "2026-09-13T12:00:00+00:00",
+   "slot": 1
+  }
+ ]
+}

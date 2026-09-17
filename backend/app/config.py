@@ -43,6 +43,12 @@ class Settings(BaseSettings):
     # success/cancel redirects. Defaults to local dev.
     FRONTEND_URL: Optional[str] = None
 
+    # Founder decision 2026-09-14: the entire first year is free. While
+    # true, paid-tier features (e.g. tipping-point explainers) are
+    # visible to everyone. Flip to false when year one ends and paid
+    # subscriptions take over.
+    YEAR_ONE_FREE: bool = True
+
     # Odds provider
     ODDS_API_KEY: Optional[str] = None
     ODDS_API_BASE_URL: Optional[str] = None

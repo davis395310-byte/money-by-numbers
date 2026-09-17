@@ -7,6 +7,7 @@ const NAV_ITEMS = [
   { label: "Home", href: "/" },
   { label: "NFL", href: "/nfl" },
   { label: "Best Bets", href: "/best-bets" },
+  { label: "Pro Picks", href: "/pro" },
   { label: "Track Record", href: "/track-record" },
   { label: "Numby", href: "/numby" },
   { label: "How It Works", href: "/how-it-works" },
