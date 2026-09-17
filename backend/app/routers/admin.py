@@ -460,53 +460,10 @@ def scheduler_alerts(
 
 
 # ---------------------------------------------------------------------------
-# Data seeding (production bootstrap).
+# Data seeding (production bootstrap) — REMOVED 2026-09-17.
 # ---------------------------------------------------------------------------
-# The production database starts empty; the sandbox cannot reach Atlas over
-# the MongoDB wire protocol (egress proxy blocks port 27017), so the initial
-# dataset is loaded through this admin-gated endpoint over HTTPS. Only
-# whitelisted content collections may be seeded, documents arrive as
-# Extended JSON (bson.json_util) so ObjectIds and datetimes round-trip
-# exactly, and the collection is replaced atomically per call.
-
-
-SEEDABLE_COLLECTIONS = frozenset(
-    {"odds", "predictions", "models", "pick_explainers"}
-)
-
-
-class SeedRequest(BaseModel):
-    collection: str
-    documents: List[Any]
-
-
-@router.post("/seed", dependencies=[Depends(require_admin)])
-def seed_collection(body: SeedRequest) -> Dict[str, Any]:
-    """Replace a whitelisted content collection with the posted documents.
-
-    Body: {"collection": "<name>", "documents": [<Extended JSON docs>]}.
-    The collection is cleared and re-inserted in one call; counts are
-    returned so the caller can verify the load.
-    """
-    from bson.json_util import loads as _bson_loads
-
-    if body.collection not in SEEDABLE_COLLECTIONS:
-        raise HTTPException(
-            status_code=400,
-            detail=f"collection '{body.collection}' is not seedable",
-        )
-    try:
-        docs = [_bson_loads(__import__("json").dumps(d)) for d in body.documents]
-    except Exception as exc:
-        raise HTTPException(status_code=400, detail=f"invalid documents: {exc}")
-    db = _require_db()
-    db[body.collection].delete_many({})
-    inserted = 0
-    if docs:
-        result = db[body.collection].insert_many(docs)
-        inserted = len(result.inserted_ids)
-    return {
-        "collection": body.collection,
-        "inserted": inserted,
-        "count": db[body.collection].count_documents({}),
-    }
+# POST /api/admin/seed existed only to load the initial dataset over HTTPS
+# (the sandbox cannot reach Atlas on the MongoDB wire protocol). The four
+# content collections were seeded and verified on 2026-09-17
+# (odds 239, predictions 16, models 1, pick_explainers 16), after which the
+# endpoint was deleted so production has no bulk-replace write path.
