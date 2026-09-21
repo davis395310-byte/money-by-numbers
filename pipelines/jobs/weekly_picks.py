@@ -186,6 +186,7 @@ class WeeklyPicksJob(Job):
 
         locked: List[Dict[str, Any]] = []
         skipped: List[Dict[str, str]] = []
+        duplicate_skips = 0
         for row in target.itertuples(index=False):
             kickoff = row.kickoff
             if kickoff is None or kickoff <= now:
@@ -206,12 +207,19 @@ class WeeklyPicksJob(Job):
             )
             market = None if dry_run else _latest_market_line(db, row.game_id)
             market_kwargs: Dict[str, Any] = {}
-            if market and market.get("moneyline_home") is not None:
-                market_kwargs["market_price_at_pick"] = (
-                    int(market["moneyline_home"])
+            # Guard on the picked side's price, not just the home side: a
+            # snapshot missing one side must never reach int(None).
+            market_price = None
+            if market:
+                raw_price = (
+                    market.get("moneyline_home")
                     if winner == row.home_team
-                    else int(market["moneyline_away"])
+                    else market.get("moneyline_away")
                 )
+                if raw_price is not None:
+                    market_price = int(raw_price)
+            if market_price is not None:
+                market_kwargs["market_price_at_pick"] = market_price
                 market_kwargs["sportsbook"] = str(market.get("sportsbook") or "odds_snapshot")
             pick_doc: Dict[str, Any] = {
                 "prediction_id": prediction_id,
@@ -234,7 +242,12 @@ class WeeklyPicksJob(Job):
             try:
                 stored = lock_pick(db, **pick_doc, **market_kwargs)
             except PickLedgerError as exc:
-                skipped.append({"game_id": row.game_id, "reason": str(exc)[:200]})
+                reason = str(exc)[:200]
+                skipped.append({"game_id": row.game_id, "reason": reason})
+                if "duplicate" in reason.lower():
+                    # Already locked by an earlier run: an idempotent
+                    # rerun, not an operational failure.
+                    duplicate_skips += 1
                 continue
             explainer_in = {
                 "prediction_id": prediction_id,
@@ -246,7 +259,7 @@ class WeeklyPicksJob(Job):
                 "model_version": model_version,
             }
             market_in = None
-            if market and market.get("moneyline_home") is not None:
+            if market_price is not None:
                 market_in = {
                     "moneyline_home": market["moneyline_home"],
                     "moneyline_away": market["moneyline_away"],
@@ -297,13 +310,25 @@ class WeeklyPicksJob(Job):
             "training_window": f"{TRAIN_START}-{TRAIN_END}",
             "locked": len(locked),
             "skipped": skipped,
+            "duplicate_skips": duplicate_skips,
             "board": locked,
         }
         if not locked and not dry_run:
-            record.finish(
-                JobStatus.FAILED,
-                error=f"week {week}: no picks locked ({len(skipped)} skipped)",
-            )
+            if skipped and duplicate_skips == len(skipped):
+                # Every pick was already locked by an earlier run: the
+                # rerun changed nothing, so it succeeds idempotently
+                # rather than raising a false failure alert.
+                record.detail["idempotent_rerun"] = True
+                record.detail["note"] = (
+                    "all picks already locked; duplicates refused "
+                    "(idempotent rerun, no new writes)"
+                )
+                record.finish(JobStatus.SUCCEEDED)
+            else:
+                record.finish(
+                    JobStatus.FAILED,
+                    error=f"week {week}: no picks locked ({len(skipped)} skipped)",
+                )
         else:
             record.finish(JobStatus.SUCCEEDED)
         return record

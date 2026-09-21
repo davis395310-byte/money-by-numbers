@@ -199,6 +199,53 @@ def test_no_lockable_week_skips_honestly(db):
     assert record.status == JobStatus.SKIPPED
 
 
+def test_idempotent_rerun_succeeds_not_failed(db):
+    first = _run_job(db, _week3_rows())
+    assert first.status == JobStatus.SUCCEEDED
+    assert first.detail["locked"] == 2
+    second = _run_job(db, _week3_rows())
+    # Every pick already locked: the rerun writes nothing but succeeds
+    # idempotently instead of emitting a false failure alert.
+    assert second.status == JobStatus.SUCCEEDED
+    assert second.detail["locked"] == 0
+    assert second.detail["duplicate_skips"] == 2
+    assert second.detail.get("idempotent_rerun") is True
+    assert db["predictions"].count_documents({}) == 2
+    assert db["pick_explainers"].count_documents({}) == 2
+
+
+def test_partial_moneyline_snapshot_never_crashes(db):
+    # Snapshot carries a home price but no away price, and the model
+    # picks the AWAY team (KC's Elo dominates after 12 straight wins
+    # over BUF in the training games). Attaching the market must not
+    # call int(None) and crash the whole job.
+    db["odds"].insert_one(
+        {
+            "game_id": "2026_03_BUF_KC",
+            "moneyline_home": 130,
+            "moneyline_away": None,
+            "timestamp": NOW - timedelta(hours=1),
+            "sportsbook": "test_book",
+        }
+    )
+    rows = _training_games() + [
+        _game("2026_03_BUF_KC", 2026, 3, "BUF", "KC",
+              NOW + timedelta(days=2), None, None),
+    ]
+    record = _run_job(db, rows)
+    assert record.status == JobStatus.SUCCEEDED
+    assert record.detail["locked"] == 1
+    pick = db["predictions"].find_one({"game_id": "2026_03_BUF_KC"})
+    assert pick["predicted_winner"] == "KC"  # the away team
+    # Partial market not attached (the key exists as null via the ledger
+    # schema; what matters is no int(None) crash and no bogus price).
+    assert pick.get("market_price_at_pick") is None
+    explainer = db["pick_explainers"].find_one(
+        {"prediction_id": pick["prediction_id"]}
+    )
+    assert explainer is not None  # explainer still generated, sans market line
+
+
 # ---------------------------------------------------------------------------
 # Roster registration
 # ---------------------------------------------------------------------------
