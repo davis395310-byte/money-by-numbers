@@ -5,9 +5,13 @@
 - The new subscriptions overview aggregates real records only and never
   reports revenue.
 - Admin responses never leak the admin key or other secrets.
-- There is NO write path from any admin route (or any route at all) to the
-  predictions ledger: settled picks cannot be created, edited, or deleted
-  through the API.
+- POST /api/admin/scheduler/jobs/{name}/run is the ONE admin write path
+  into the pipeline: it can only fire an existing scheduled job with
+  force=True (never bypassing the DB lock, the job's own safety rules, or
+  the append-only audit). It cannot create, edit, or delete arbitrary
+  ledger records; lock_pick still structurally refuses post-kickoff and
+  duplicate writes, and the weekly_picks job itself refuses partial weeks.
+  No other admin route writes to the predictions ledger.
 """
 
 import os
@@ -36,6 +40,7 @@ ADMIN_ROUTES = [
     ("GET", "/api/admin/scheduler/jobs"),
     ("GET", "/api/admin/scheduler/runs"),
     ("GET", "/api/admin/scheduler/alerts"),
+    ("POST", "/api/admin/scheduler/jobs/nope/run"),
     ("GET", "/api/admin/subscriptions/overview"),
 ]
 
@@ -202,3 +207,63 @@ class TestNoLedgerWritePath:
         assert hasattr(ledger, "lock_pick")
         src = inspect.getsource(ledger.lock_pick)
         assert "kickoff" in src.lower(), "lock_pick must enforce the kickoff cutoff"
+
+
+class TestSchedulerRunTrigger:
+    """POST /api/admin/scheduler/jobs/{name}/run — on-demand job firing."""
+
+    def _client_with_fake_runner(self, db, monkeypatch, run_job):
+        class FakeRunner:
+            def run_job(self, name, context=None, now=None, force=False):
+                return run_job(name, force=force)
+
+        monkeypatch.setattr(admin_router, "_db", lambda: db)
+        monkeypatch.setattr(admin_router, "_scheduler_runner", lambda _db: FakeRunner())
+        monkeypatch.setenv("ADMIN_API_KEY", "test-admin-key")
+        from app.main import app
+
+        return TestClient(app)
+
+    def test_trigger_passes_force_and_returns_record(self, db, monkeypatch):
+        from types import SimpleNamespace
+        from pipelines.scheduler import JobStatus
+
+        seen = {}
+
+        def run_job(name, force=False):
+            seen["name"] = name
+            seen["force"] = force
+            return SimpleNamespace(
+                job_id="weekly_picks-abc123",
+                status=JobStatus.SUCCEEDED,
+                error=None,
+                detail={"locked": 16},
+            )
+
+        client = self._client_with_fake_runner(db, monkeypatch, run_job)
+        r = client.post(
+            "/api/admin/scheduler/jobs/weekly_picks/run", headers=ADMIN_HEADERS
+        )
+        assert r.status_code == 200, r.text[:200]
+        assert seen == {"name": "weekly_picks", "force": True}
+        body = r.json()
+        assert body["job_name"] == "weekly_picks"
+        assert body["status"] == "succeeded"
+        assert body["detail"] == {"locked": 16}
+
+    def test_trigger_unknown_job_is_400(self, db, monkeypatch):
+        def run_job(name, force=False):
+            raise KeyError(f"unknown scheduled job: {name!r}")
+
+        client = self._client_with_fake_runner(db, monkeypatch, run_job)
+        r = client.post(
+            "/api/admin/scheduler/jobs/nope/run", headers=ADMIN_HEADERS
+        )
+        assert r.status_code == 400, r.text[:200]
+
+    def test_trigger_needs_admin_key(self, db, monkeypatch):
+        client = self._client_with_fake_runner(db, monkeypatch, lambda n, force=False: None)
+        r = client.post(
+            "/api/admin/scheduler/jobs/weekly_picks/run", headers=WRONG_HEADERS
+        )
+        assert r.status_code == 403

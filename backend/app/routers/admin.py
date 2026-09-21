@@ -459,6 +459,38 @@ def scheduler_alerts(
     return {"alerts": docs, "count": len(docs)}
 
 
+@router.post("/scheduler/jobs/{name}/run")
+def scheduler_run_job(
+    name: str,
+    x_admin_key: Optional[str] = Header(default=None, alias="X-Admin-Key"),
+):
+    """Run one scheduled job on demand (admin only).
+
+    Bypasses the schedule's due-ness via ``force=True`` but never bypasses
+    the DB lock, the job's own safety rules, or the append-only audit
+    trail. Used for operational recovery (e.g. re-firing a job whose
+    container was asleep at its scheduled tick). The job runs
+    synchronously in this request; expect it to take as long as the job
+    itself takes (tens of seconds for weekly_picks).
+    """
+    require_admin(x_admin_key)
+    db = _db()
+    if db is None:
+        raise HTTPException(status_code=503, detail="database not configured")
+    runner = _scheduler_runner(db)
+    try:
+        record = runner.run_job(name, force=True)
+    except Exception as exc:  # unknown job name, lock errors, etc.
+        raise HTTPException(status_code=400, detail=str(exc)[:300])
+    return {
+        "job_name": name,
+        "run_id": getattr(record, "job_id", ""),
+        "status": getattr(record.status, "value", record.status),
+        "error": record.error,
+        "detail": record.detail,
+    }
+
+
 # ---------------------------------------------------------------------------
 # Data seeding (production bootstrap) — REMOVED 2026-09-17.
 # ---------------------------------------------------------------------------
