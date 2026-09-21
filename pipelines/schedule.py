@@ -182,6 +182,21 @@ JOB_SCHEDULES: List[Dict[str, Any]] = [
         ),
     },
     {
+        "name": "weekly_picks",
+        "job_path": "pipelines.jobs.weekly_picks:WeeklyPicksJob",
+        "cadence": {"kind": "weekly_days", "days": [1],
+                    "hour_utc": 14, "minute_utc": 0},
+        "in_season_only": True,
+        "max_gap_hours": 120,
+        "description": (
+            "Weekly picks lock Tue in season: replays the registered "
+            "champion Elo through all finals, fits the predicted-margin "
+            "slope on 2016-2025, and locks the upcoming week's picks via "
+            "the immutable ledger (pre-kickoff only; duplicates refused). "
+            "Skips partial weeks — never backfills."
+        ),
+    },
+    {
         "name": "weekly_context",
         "job_path": "pipelines.jobs.weekly:WeeklyJob",
         "cadence": {"kind": "weekly_days", "days": [2],

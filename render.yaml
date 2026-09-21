@@ -14,7 +14,7 @@ services:
     runtime: docker
     plan: free
     dockerfilePath: ./backend/Dockerfile
-    dockerContext: ./backend
+    dockerContext: ./
     healthCheckPath: /api/health
     envVars:
       - key: ENVIRONMENT

@@ -1,11 +1,16 @@
 FROM python:3.12-slim
 
+# Repo-root build context (see render.yaml): the image carries the API app
+# plus the pipelines/ job modules and ml/ feature/model code so the
+# in-process scheduler (app/main.py lifespan) can run the Phase 10 roster.
 WORKDIR /srv/app
 
-COPY requirements.txt .
+COPY backend/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY app ./app
+COPY backend/app ./app
+COPY pipelines ./pipelines
+COPY ml ./ml
 
 EXPOSE 8000
 
