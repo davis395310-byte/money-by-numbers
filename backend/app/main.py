@@ -45,7 +45,7 @@ def _scheduler_loop(stop: threading.Event, interval_s: int = 300) -> None:
     except Exception as exc:  # noqa: BLE001 - the API must boot regardless
         log.warning("scheduler loop disabled: %s", exc)
         return
-    while not stop.wait(interval_s):
+    while True:
         try:
             records = runner.run_due_jobs()
             for record in records:
@@ -56,6 +56,8 @@ def _scheduler_loop(stop: threading.Event, interval_s: int = 300) -> None:
                 )
         except Exception as exc:  # noqa: BLE001 - one bad tick never kills the loop
             log.warning("scheduler tick failed: %s", exc)
+        if stop.wait(interval_s):
+            break
 
 
 @asynccontextmanager
