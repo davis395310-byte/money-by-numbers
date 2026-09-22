@@ -35,7 +35,7 @@ returns it in the record detail without writing anything.
 
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
 
 from pipelines.jobs._common import ensure_repo_root, require_db, utcnow
@@ -63,12 +63,28 @@ def _champion_version(db: Any) -> Dict[str, Any]:
     }
 
 
+def _aware_utc(dt: datetime) -> datetime:
+    """Return ``dt`` as a tz-aware UTC datetime.
+
+    The scheduler runner hands the job a tz-naive UTC ``now`` (naive is
+    what Mongo stores), while the nflverse provider yields tz-aware
+    kickoffs (America/New_York). Comparing them directly raises
+    ``TypeError: can't compare offset-naive and offset-aware datetimes``,
+    which is exactly how the 2026-09-22 production run died. Normalizing
+    both sides to aware UTC keeps the kickoff gate structural and safe.
+    """
+    if dt.tzinfo is None:
+        return dt.replace(tzinfo=timezone.utc)
+    return dt.astimezone(timezone.utc)
+
+
 def _target_week(games: Any, season: int, now: datetime) -> int:
     """Earliest REG week of ``season`` whose games all kick off after ``now``.
 
     Raises SkipJob when no such week exists (season not started in a
     usable way, or season complete).
     """
+    now = _aware_utc(now)
     weeks: Dict[int, List[Any]] = {}
     for row in games.itertuples(index=False):
         if row.season != season:
@@ -76,7 +92,9 @@ def _target_week(games: Any, season: int, now: datetime) -> int:
         weeks.setdefault(int(row.week), []).append(row.kickoff)
     for week in sorted(weeks):
         kickoffs = weeks[week]
-        if kickoffs and all(k is not None and k > now for k in kickoffs):
+        if kickoffs and all(
+            k is not None and _aware_utc(k) > now for k in kickoffs
+        ):
             return week
     raise SkipJob(
         f"no lockable week for season {season}: every scheduled week "
@@ -120,7 +138,7 @@ class WeeklyPicksJob(Job):
             record.finish(JobStatus.FAILED, error=str(exc)[:500])
             return record
 
-        now = context.get("now") or utcnow()
+        now = _aware_utc(context.get("now") or utcnow())
         season = current_season(now)
 
         try:
@@ -189,7 +207,7 @@ class WeeklyPicksJob(Job):
         duplicate_skips = 0
         for row in target.itertuples(index=False):
             kickoff = row.kickoff
-            if kickoff is None or kickoff <= now:
+            if kickoff is None or _aware_utc(kickoff) <= now:
                 skipped.append(
                     {"game_id": row.game_id, "reason": "kickoff not in the future"}
                 )

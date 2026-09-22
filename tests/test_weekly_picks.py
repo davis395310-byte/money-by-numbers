@@ -257,3 +257,43 @@ def test_weekly_picks_in_roster():
     assert entry["cadence"]["days"] == [1]  # Tuesdays
     assert entry["in_season_only"] is True
     assert any(e["name"] == "weekly_picks" for e in JOB_SCHEDULES)
+
+
+# ---------------------------------------------------------------------------
+# Naive/aware datetime regression (2026-09-22 production failure)
+# ---------------------------------------------------------------------------
+
+def test_target_week_survives_runner_naive_now_with_aware_kickoffs():
+    """The scheduler runner strips tzinfo from ``now`` (Mongo storage) while
+    the nflverse provider yields tz-aware kickoffs (America/New_York).
+    Comparing them directly raised ``TypeError: can't compare offset-naive
+    and offset-aware datetimes`` in production on 2026-09-22. The job must
+    normalize both sides instead of crashing."""
+    from zoneinfo import ZoneInfo
+
+    naive_now = datetime(2026, 9, 22, 12, 0)  # what the runner hands the job
+    aware_ko = datetime(2026, 9, 24, 20, 15, tzinfo=ZoneInfo("America/New_York"))
+    rows = _training_games() + [
+        _game("2026_03_GB_MIN", 2026, 3, "GB", "MIN", aware_ko, None, None),
+    ]
+    assert _target_week(_frame(rows), 2026, naive_now) == 3
+
+def test_target_week_respects_true_kickoff_instant_across_zones():
+    """A naive 16:00 UTC ``now`` must NOT treat an Eastern 12:00 kickoff
+    (16:00 UTC, exactly at now) as future, nor an Eastern 13:00 kickoff
+    (17:00 UTC) as past."""
+    from zoneinfo import ZoneInfo
+
+    et = ZoneInfo("America/New_York")
+    naive_now = datetime(2026, 9, 22, 16, 0)
+    rows = _training_games() + [
+        _game("2026_03_GB_MIN", 2026, 3, "GB", "MIN",
+              datetime(2026, 9, 24, 13, 0, tzinfo=et), None, None),
+        _game("2026_03_DET_CHI", 2026, 3, "DET", "CHI",
+              datetime(2026, 9, 24, 12, 0, tzinfo=et), None, None),
+    ]
+    # Both games are after naive_now, so week 3 is lockable.
+    assert _target_week(_frame(rows), 2026, naive_now) == 3
+    # But at 17:00 UTC the 13:00 ET game is exactly at now -> not all future.
+    with pytest.raises(SkipJob):
+        _target_week(_frame(rows), 2026, datetime(2026, 9, 24, 17, 0))
