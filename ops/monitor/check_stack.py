@@ -21,7 +21,8 @@ Design notes:
     Tuesday-lock window: before the deadline a missing board is "pending",
     after it a missing/incomplete board is a failure.
   - Minimum board size is 13 (bye weeks can drop below 16 games).
-  - Stdlib only: urllib, json, datetime. No installs, no secrets.
+  - Stdlib only (plus the curl binary for proxy-reliable fetching).
+    No installs, no secrets.
 """
 
 from __future__ import annotations
@@ -29,8 +30,6 @@ from __future__ import annotations
 import datetime as dt
 import json
 import sys
-import urllib.request
-import urllib.error
 
 BACKEND = "https://mnb-backend-sh83.onrender.com"
 FRONTEND = "https://money-by-numbers.vercel.app"
@@ -43,19 +42,44 @@ def _now() -> dt.datetime:
 
 
 def _get(url: str, timeout: int):
-    """GET url -> (status_code or None, body). None on transport failure."""
-    req = urllib.request.Request(url, headers={"User-Agent": "mbn-stack-check/1.0"})
+    """GET url -> (status_code or None, body).
+
+    Uses curl via subprocess: this sandbox's proxy makes Python HTTP
+    clients (urllib/httpx) stall intermittently, while curl transfers
+    reliably. Stdlib-only otherwise; curl ships on the VM and on
+    GitHub Actions runners.
+    """
+    import subprocess
+    import tempfile
+    import os
+
+    tmp = tempfile.NamedTemporaryFile(delete=False, prefix="mbn_check_")
+    tmp.close()
     try:
-        with urllib.request.urlopen(req, timeout=timeout) as resp:
-            return resp.status, resp.read().decode("utf-8", "replace")
-    except urllib.error.HTTPError as exc:
+        proc = subprocess.run(
+            [
+                "curl", "-sS", "-L", "-m", str(timeout),
+                "-o", tmp.name, "-w", "%{http_code}",
+                "-A", "mbn-stack-check/1.0", url,
+            ],
+            capture_output=True, text=True, timeout=timeout + 15,
+        )
+        code = proc.stdout.strip()[-3:]
         try:
-            body = exc.read().decode("utf-8", "replace")
+            with open(tmp.name, "rb") as fh:
+                body = fh.read().decode("utf-8", "replace")
         except Exception:
             body = ""
-        return exc.code, body
-    except Exception as exc:  # DNS, timeout, TLS, cold-start stall...
+        if not code.isdigit():
+            return None, "curl error: %s" % proc.stderr.strip()[:200]
+        return int(code), body
+    except Exception as exc:  # curl missing, timeout, ...
         return None, "transport error: %s" % exc
+    finally:
+        try:
+            os.unlink(tmp.name)
+        except Exception:
+            pass
 
 
 def _parse_ts(value):
