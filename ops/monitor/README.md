@@ -5,21 +5,22 @@ Our own uptime + correctness checker. $0 forever, no vendor accounts, no
 
 ## How it works
 
-1. **Detection** — `.github/workflows/stack-check.yml` runs
-   `ops/monitor/check_stack.py` every 15 minutes on GitHub Actions
-   (free for public repos, external to Render/Vercel). Checks:
+1. **Detection** — `check_stack.py` runs every 15 minutes and hits only
+   public endpoints (no secrets). It runs on Rosie's scheduler today;
+   `stack-check.yml.github-workflow` is the same check as a GitHub Actions
+   workflow (free for public repos, external to Render/Vercel) — to enable
+   it, save that file as `.github/workflows/stack-check.yml`. That push
+   needs a GitHub token with `workflow` scope (ours doesn't have it yet).
+2. **Checks**:
    - backend `/api/health` reachable, app + database ok
    - scheduler alive (latest `weekly_picks` run didn't fail/crash —
      the dead-man's-switch for the silent scheduler crash)
    - frontend returns HTTP 200
-   - current week's board present (16-ish picks; bye weeks vary)
+   - current week's board present (13+ picks; bye weeks vary)
    - **no-post-kickoff invariant**: every pick's `created_at` is before
      its `kickoff`
-2. **Alerting** — on failure the workflow files/updates a GitHub issue
-   labeled `monitoring-alert` (idempotent: one open issue at a time,
-   auto-closed on recovery).
-3. **Notification** — a watcher forwards new `monitoring-alert` issues
-   to Richard (chat + push).
+3. **Notification** — on any failure Richard is notified directly
+   (chat + push); the failure detail names exactly what broke.
 
 ## The lock-deadline rule
 
