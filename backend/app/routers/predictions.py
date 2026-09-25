@@ -44,6 +44,7 @@ _PUBLIC_PREDICTION_FIELDS = {
     "predicted_away_score": 1,
     "confidence": 1,
     "created_at": 1,
+    "kickoff": 1,
     "actual_winner": 1,
     "correct": 1,
     "adjustments": 1,
